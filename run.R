@@ -234,4 +234,6 @@ rcp85_2070_thresh <- make_thresholded(rcp85_2070_pred, thresholds = thresholds)
 save(rcp85_2070_thresh, file = 'predictions/rcp85_2070_thresholded.Rdata')
 rm(list = c('rcp85_2070_thresh', 'rcp85_2070_pred'))
 
+# get some summary stats
 
+load('predictions/rcp85_2070_thresholded.Rdata')
