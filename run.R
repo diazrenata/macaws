@@ -235,5 +235,33 @@ save(rcp85_2070_thresh, file = 'predictions/rcp85_2070_thresholded.Rdata')
 rm(list = c('rcp85_2070_thresh', 'rcp85_2070_pred'))
 
 # get some summary stats
-
+source('functions/report_summary_stats.R')
 load('predictions/rcp85_2070_thresholded.Rdata')
+rcp85_2070_stats <- report_summary_stats(rcp85_2070_thresh)
+rm(rcp85_2070_thresh)
+
+load('predictions/rcp85_2050_thresholded.Rdata')
+rcp85_2050_stats <- report_summary_stats(rcp85_2050_thresh)
+rm(rcp85_2050_thresh)
+
+load('predictions/rcp26_2070_thresholded.Rdata')
+rcp26_2070_stats <- report_summary_stats(rcp26_2070_thresh)
+rm(rcp26_2070_thresh)
+
+load('predictions/rcp26_2050_thresholded.Rdata')
+rcp26_2050_stats <- report_summary_stats(rcp26_2050_thresh)
+rm(rcp26_2050_thresh)
+
+all_sum_stats <- rbind(rcp26_2050_stats, rcp26_2070_stats,
+                       rcp85_2050_stats, rcp85_2070_stats)
+all_sum_stats <- as.data.frame(all_sum_stats)
+colnames(all_sum_stats) <- c('total_cells', 'lows', 'mediums', 'highs')
+all_sum_stats$rcp <- c(26, 26, 85, 85)
+all_sum_stats$yr <- c(50, 70, 50, 70)
+
+write.csv(all_sum_stats, 'predictions/summary_stats.csv',
+          row.names = F)
+
+rm(all_sum_stats)
+rm(list = c('rcp26_2050_stats', 'rcp26_2070_stats',
+                       'rcp85_2050_stats', 'rcp85_2070_stats'))
