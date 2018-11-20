@@ -1,0 +1,91 @@
+---
+title: "Macaws SDM"
+author: "Renata Diaz"
+date: "11/20/2018"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+```
+
+## Maxent models
+
+#### Response plots: 
+```{r load maxent models}
+me_models <- list.files('models/present/', 
+                        pattern = 'me_', full.names = T)
+for(i in 1:length(me_models)) {
+  load(me_models[i])
+}
+
+dismo::response(me_b001, main = 'Beta = 0.01')
+dismo::response(me_b01, main = 'Beta = 0.1')
+dismo::response(me_b05, main = 'Beta = 0.5')
+dismo::response(me_b09, main = 'Beta = 0.9')
+
+rm(me_b001)
+rm(me_b01)
+rm(me_b05)
+rm(me_b09)
+
+rm(me_models)
+```
+
+#### Boyce's criterion
+
+Correlation coefficient for each model: 
+
+```{r load boyce}
+boyces <- list.files('models/present', pattern = 'boyce', 
+                     full.names = T)
+
+for(i in 1:length(boyces)) {
+  load(boyces[i])
+}
+boyce_coeff <- list()
+
+boyce_coeff[[1]] <- boyce_b001$Spearman.cor
+boyce_coeff[[2]] <- boyce_b01$Spearman.cor
+boyce_coeff[[3]] <- boyce_b05$Spearman.cor
+boyce_coeff[[4]] <- boyce_b09$Spearman.cor
+
+names(boyce_coeff) <- c('beta0.01', 'beta0.1', 'beta0.5', 'beta0.9')
+
+boyce_coeff
+
+rm(boyce_coeff)
+rm(list = c('boyce_b001', 'boyce_b01', 'boyce_b05', 'boyce_b09'))
+```
+
+
+
+The model with high beta (0.9) has the highest correlation coefficient, although it's worth noting that all of the models perform well and they generate qualitatively similar response plots.
+
+
+Further analyses done using the model with beta = 0.9.
+
+## Future predictions
+
+#### RCP 26 (less extreme climate change scenario)
+
+```{r load RCP 26s}
+
+load('predictions/rcp26_2050.Rdata')
+load('predictions/rcp26_2070.Rdata')
+
+raster::plot(rcp26_2050_pred, main = 'RCP 26 - 2050')
+raster::plot(rcp26_2070_pred, main = 'RCP 26 - 2070')
+
+```
+
+#### RCP 85 (more extreme climate change scenario)
+```{r load RCP 85s}
+
+load('predictions/rcp85_2050.Rdata')
+load('predictions/rcp85_2070.Rdata')
+
+raster::plot(rcp85_2050_pred, main = 'RCP 26 - 2050')
+raster::plot(rcp85_2070_pred, main = 'RCP 26 - 2070')
+
+```
