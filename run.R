@@ -217,7 +217,7 @@ rm(rcp85_2070_pred)
 rm(rcp85_2070_layers)
 
 # Threshold all rasters 
-
+source('functions/make_thresholded.R')
 # Start with present
 # Use this to get threshold values
 load('models/present/fit_b1.Rdata')

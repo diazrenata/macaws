@@ -68,9 +68,16 @@ The model with high beta (beta = 1) has the highest correlation coefficient, alt
 
 Further analyses done using the model with beta = 1. 
 
-## Future predictions
+## Predictions
 
 ### Raw predictions
+
+#### Present
+```{r load present raw} 
+load('models/present/fit_b1.Rdata')
+raster::plot(fit_b1, main = 'Present')
+rm(list=ls())
+```
 
 #### RCP 26 (less extreme climate change scenario)
 
@@ -103,6 +110,13 @@ Thresholded based on the 50% and 80% quantiles of the model prediction generated
 
 1 = low, 2 = med, 3 = high.
 
+#### Present
+```{r load present thresh} 
+load('models/present/b1_thresholded.Rdata')
+raster::plot(present_thresh, main = 'Present', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
+rm(list=ls())
+```
+
 #### RCP 26 (less extreme climate change scenario)
 
 ```{r load RCP 26s thresholded}
@@ -122,8 +136,8 @@ rm(list=ls())
 load('predictions/rcp85_2050_thresholded.Rdata')
 load('predictions/rcp85_2070_thresholded.Rdata')
 
-raster::plot(rcp85_2050_thresh, main = 'RCP 26 - 2050', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
-raster::plot(rcp85_2070_thresh, main = 'RCP 26 - 2070', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
+raster::plot(rcp85_2050_thresh, main = 'RCP 85 - 2050', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
+raster::plot(rcp85_2070_thresh, main = 'RCP 85 - 2070', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
 rm(list=ls())
 
 ```
