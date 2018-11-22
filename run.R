@@ -36,6 +36,25 @@ load('data/present/ready/covariates.Rdata')
 load('data/present/ready/train.Rdata')
 source('functions/run_maxent_model.R')
 
+#### beta = 1 ####
+me_b1 <- run_maxent_model(betaval = 1)
+
+save(me_b1, file = 'models/present/me_b1.Rdata')
+
+fit_b1 <- fit_maxent_model(me_b1)
+
+save(fit_b1, file = 'models/present/fit_b1.Rdata')
+
+rm(me_b1)
+
+load('data/present/ready/test.Rdata')
+boyce_b1 <- boyce_maxent_model(fit = fit_b1)
+
+save(boyce_b1, file = 'models/present/boyce_b1.Rdata' )
+
+rm(list=c('fit_b1', 'boyce_b1'))
+
+
 #### beta = 0.01 ####
 me_b001 <- run_maxent_model(betaval = 0.01)
 
@@ -109,7 +128,7 @@ save(boyce_b09, file = 'models/present/boyce_b09.Rdata' )
 rm(list=c('fit_b09', 'boyce_b09'))
 
 #### model selection ####
-
+source('functions/extract_boyce.R')
 boyces_list <- list.files(path='models/present/', pattern = 'boyce', full.names = T)
 
 for (i in 1:length(boyces_list)) {
@@ -122,8 +141,8 @@ extract_boyce(boyce_b001)
 extract_boyce(boyce_b01)
 extract_boyce(boyce_b05)
 extract_boyce(boyce_b09)
-
-# highest boyce is b09 = .985.
+extract_boyce(boyce_b1)
+# highest boyce is b1 = .987.
 
 rm(list = ls())
 
@@ -132,12 +151,14 @@ load(file = 'models/present/me_b09.Rdata')
 load(file = 'models/present/me_b05.Rdata')
 load(file = 'models/present/me_b01.Rdata')
 load(file = 'models/present/me_b001.Rdata')
+load(file = 'models/present/me_b1.Rdata')
 response(me_b09, expand=0)
 response(me_b05, expand=0)
 response(me_b01, expand=0)
 response(me_b001, expand=0)
+response(me_b1, expand =0)
 
-rm(list = c('me_b001', 'me_b01', 'me_b05'))
+rm(list = c('me_b001', 'me_b01', 'me_b05', 'me_b09'))
 #### make future predictions ####
 
 load('data/present/ready/macawlayers.Rdata')
@@ -162,19 +183,19 @@ save(rcp85_2070_layers, file = "data/climate_predictions/ready/rcp85_2070_layers
 rm(rcp85_2070_layers)
 
 
-load(file = 'models/present/me_b09.Rdata')
+load(file = 'models/present/me_b1.Rdata')
 
 source('functions/get_future_predictions.R')
 
 load(file = "data/climate_predictions/ready/rcp26_2050_layers.Rdata")
-rcp26_2050_pred <- get_future_predictions(me_model = me_b09, 
+rcp26_2050_pred <- get_future_predictions(me_model = me_b1, 
                                           futurelayers = rcp26_2050_layers)
 save(rcp26_2050_pred, file = 'predictions/rcp26_2050.Rdata')
 rm(rcp26_2050_pred)
 rm(rcp26_2050_layers)
 
 load(file = "data/climate_predictions/ready/rcp26_2070_layers.Rdata")
-rcp26_2070_pred <- get_future_predictions(me_model = me_b09, 
+rcp26_2070_pred <- get_future_predictions(me_model = me_b1, 
                                           futurelayers = rcp26_2070_layers)
 save(rcp26_2070_pred, file = 'predictions/rcp26_2070.Rdata')
 rm(rcp26_2070_pred)
@@ -182,14 +203,14 @@ rm(rcp26_2070_layers)
 
 
 load(file = "data/climate_predictions/ready/rcp85_2050_layers.Rdata")
-rcp85_2050_pred <- get_future_predictions(me_model = me_b09, 
+rcp85_2050_pred <- get_future_predictions(me_model = me_b1, 
                                           futurelayers = rcp85_2050_layers)
 save(rcp85_2050_pred, file = 'predictions/rcp85_2050.Rdata')
 rm(rcp85_2050_pred)
 rm(rcp85_2050_layers)
 
 load(file = "data/climate_predictions/ready/rcp85_2070_layers.Rdata")
-rcp85_2070_pred <- get_future_predictions(me_model = me_b09, 
+rcp85_2070_pred <- get_future_predictions(me_model = me_b1, 
                                           futurelayers = rcp85_2070_layers)
 save(rcp85_2070_pred, file = 'predictions/rcp85_2070.Rdata')
 rm(rcp85_2070_pred)
@@ -199,18 +220,18 @@ rm(rcp85_2070_layers)
 
 # Start with present
 # Use this to get threshold values
-load('models/present/fit_b09.Rdata')
+load('models/present/fit_b1.Rdata')
 
-thresholds <- quantile(fit_b09, probs = c(0.5, 0.8))
+thresholds <- quantile(fit_b1, probs = c(0.5, 0.8))
 
-present_thresh <- make_thresholded(fit_b09, thresholds = thresholds)
+present_thresh <- make_thresholded(fit_b1, thresholds = thresholds)
 
 plot(present_thresh, main = 'Present suitability')
 
-save(present_thresh, file = 'models/present/b09_thresholded.Rdata')
+save(present_thresh, file = 'models/present/b1_thresholded.Rdata')
 
 rm(present_thresh)
-rm(fit_b09)
+rm(fit_b1)
 
 # Now reclassify predictions using these thresholds
 

@@ -23,11 +23,13 @@ dismo::response(me_b001, main = 'Beta = 0.01')
 dismo::response(me_b01, main = 'Beta = 0.1')
 dismo::response(me_b05, main = 'Beta = 0.5')
 dismo::response(me_b09, main = 'Beta = 0.9')
+dismo::response(me_b09, main = 'Beta = 1')
 
 rm(me_b001)
 rm(me_b01)
 rm(me_b05)
 rm(me_b09)
+rm(me_b1)
 
 rm(me_models)
 ```
@@ -49,8 +51,9 @@ boyce_coeff[[1]] <- boyce_b001$Spearman.cor
 boyce_coeff[[2]] <- boyce_b01$Spearman.cor
 boyce_coeff[[3]] <- boyce_b05$Spearman.cor
 boyce_coeff[[4]] <- boyce_b09$Spearman.cor
+boyce_coeff[[5]] <- boyce_b1$Spearman.cor
 
-names(boyce_coeff) <- c('beta0.01', 'beta0.1', 'beta0.5', 'beta0.9')
+names(boyce_coeff) <- c('beta0.01', 'beta0.1', 'beta0.5', 'beta0.9', 'beta1')
 
 boyce_coeff
 
@@ -60,10 +63,10 @@ rm(list = c('boyce_b001', 'boyce_b01', 'boyce_b05', 'boyce_b09'))
 
 
 
-The model with high beta (0.9) has the highest correlation coefficient, although it's worth noting that all of the models perform well and they generate qualitatively similar response plots.
+The model with high beta (beta = 1) has the highest correlation coefficient, although it's worth noting that all of the models perform well and they generate qualitatively similar response plots.
 
 
-Further analyses done using the model with beta = 0.9.
+Further analyses done using the model with beta = 1. 
 
 ## Future predictions
 

@@ -1,4 +1,9 @@
 .Rproj.user
+macaws.Rproj
 .Rhistory
 .RData
 .Ruserdata
+/data/
+/models/
+/predictions/
+.DS_Store

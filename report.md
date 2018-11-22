@@ -10,7 +10,7 @@ Maxent models
 
     ## Loading required namespace: rJava
 
-![](report_files/figure-markdown_github/load%20maxent%20models-1.png)![](report_files/figure-markdown_github/load%20maxent%20models-2.png)![](report_files/figure-markdown_github/load%20maxent%20models-3.png)![](report_files/figure-markdown_github/load%20maxent%20models-4.png)
+![](report_files/figure-markdown_github/load%20maxent%20models-1.png)![](report_files/figure-markdown_github/load%20maxent%20models-2.png)![](report_files/figure-markdown_github/load%20maxent%20models-3.png)![](report_files/figure-markdown_github/load%20maxent%20models-4.png)![](report_files/figure-markdown_github/load%20maxent%20models-5.png)
 
 #### Boyce's criterion
 
@@ -27,10 +27,13 @@ Correlation coefficient for each model:
     ## 
     ## $beta0.9
     ## [1] 0.985
+    ## 
+    ## $beta1
+    ## [1] 0.987
 
-The model with high beta (0.9) has the highest correlation coefficient, although it's worth noting that all of the models perform well and they generate qualitatively similar response plots.
+The model with high beta (beta = 1) has the highest correlation coefficient, although it's worth noting that all of the models perform well and they generate qualitatively similar response plots.
 
-Further analyses done using the model with beta = 0.9.
+Further analyses done using the model with beta = 1.
 
 Future predictions
 ------------------
