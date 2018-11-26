@@ -98,8 +98,8 @@ rm(list=ls())
 load('predictions/rcp85_2050.Rdata')
 load('predictions/rcp85_2070.Rdata')
 
-raster::plot(rcp85_2050_pred, main = 'RCP 26 - 2050')
-raster::plot(rcp85_2070_pred, main = 'RCP 26 - 2070')
+raster::plot(rcp85_2050_pred, main = 'RCP 85 - 2050')
+raster::plot(rcp85_2070_pred, main = 'RCP 85 - 2070')
 rm(list=ls())
 
 ```
