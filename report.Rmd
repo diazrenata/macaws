@@ -113,7 +113,7 @@ Thresholded based on the 50% and 80% quantiles of the model prediction generated
 #### Present
 ```{r load present thresh, fig.width = 5, fig.height = 6} 
 load('models/present/b1_thresholded.Rdata')
-raster::plot(present_thresh, main = 'Present', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
+raster::plot(present_thresh, main = 'Present', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3), axes =F)
 rm(list=ls())
 ```
 
