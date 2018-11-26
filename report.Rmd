@@ -124,8 +124,8 @@ rm(list=ls())
 load('predictions/rcp26_2050_thresholded.Rdata')
 load('predictions/rcp26_2070_thresholded.Rdata')
 
-raster::plot(rcp26_2050_thresh, main = 'RCP 26 - 2050', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
-raster::plot(rcp26_2070_thresh, main = 'RCP 26 - 2070', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
+raster::plot(rcp26_2050_thresh, main = 'RCP 26 - 2050', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3), axes = F)
+raster::plot(rcp26_2070_thresh, main = 'RCP 26 - 2070', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3), axes = F)
 rm(list=ls())
 
 ```
@@ -136,8 +136,8 @@ rm(list=ls())
 load('predictions/rcp85_2050_thresholded.Rdata')
 load('predictions/rcp85_2070_thresholded.Rdata')
 
-raster::plot(rcp85_2050_thresh, main = 'RCP 85 - 2050', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
-raster::plot(rcp85_2070_thresh, main = 'RCP 85 - 2070', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
+raster::plot(rcp85_2050_thresh, main = 'RCP 85 - 2050', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3), axes = F)
+raster::plot(rcp85_2070_thresh, main = 'RCP 85 - 2070', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3), axes = F)
 rm(list=ls())
 
 ```
