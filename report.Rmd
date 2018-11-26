@@ -73,7 +73,7 @@ Further analyses done using the model with beta = 1.
 ### Raw predictions
 
 #### Present
-```{r load present raw} 
+```{r load present raw, fig.width = 5, fig.height = 6} 
 load('models/present/fit_b1.Rdata')
 raster::plot(fit_b1, main = 'Present')
 rm(list=ls())
@@ -81,7 +81,7 @@ rm(list=ls())
 
 #### RCP 26 (less extreme climate change scenario)
 
-```{r load RCP 26s raw}
+```{r load RCP 26s raw, fig.width = 5, fig.height = 6}
 
 load('predictions/rcp26_2050.Rdata')
 load('predictions/rcp26_2070.Rdata')
@@ -93,7 +93,7 @@ rm(list=ls())
 ```
 
 #### RCP 85 (more extreme climate change scenario)
-```{r load RCP 85s raw}
+```{r load RCP 85s raw, fig.width = 5, fig.height = 6}
 
 load('predictions/rcp85_2050.Rdata')
 load('predictions/rcp85_2070.Rdata')
@@ -111,7 +111,7 @@ Thresholded based on the 50% and 80% quantiles of the model prediction generated
 1 = low, 2 = med, 3 = high.
 
 #### Present
-```{r load present thresh} 
+```{r load present thresh, fig.width = 5, fig.height = 6} 
 load('models/present/b1_thresholded.Rdata')
 raster::plot(present_thresh, main = 'Present', col = RColorBrewer::brewer.pal(name = 'PuBuGn', n = 3))
 rm(list=ls())
@@ -119,7 +119,7 @@ rm(list=ls())
 
 #### RCP 26 (less extreme climate change scenario)
 
-```{r load RCP 26s thresholded}
+```{r load RCP 26s thresholded, fig.width = 5, fig.height = 6}
 
 load('predictions/rcp26_2050_thresholded.Rdata')
 load('predictions/rcp26_2070_thresholded.Rdata')
@@ -131,7 +131,7 @@ rm(list=ls())
 ```
 
 #### RCP 85 (more extreme climate change scenario)
-```{r load RCP 85s thresholded}
+```{r load RCP 85s thresholded, fig.width = 5, fig.height = 6}
 
 load('predictions/rcp85_2050_thresholded.Rdata')
 load('predictions/rcp85_2070_thresholded.Rdata')
