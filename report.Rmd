@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = F)
 ## Maxent models
 
 #### Response plots: 
-```{r load maxent models}
+```{r load maxent models, fig.width = 8, fig.height = 4}
 me_models <- list.files('models/present/', 
                         pattern = 'me_', full.names = T)
 for(i in 1:length(me_models)) {
@@ -144,7 +144,7 @@ rm(list=ls())
 
 #### Summary stats based on thresholds
 
-``` {r readsum}
+``` {r readsum, fig.width = 5, fig.height = 7}
 library(dplyr)
 library(ggplot2)
 stats <- read.csv('predictions/summary_stats.csv')
@@ -177,10 +177,10 @@ newprop <- rbind(stats,stats,stats)
 newprop$prop <- newprop$proplow
 newprop$prop[5:8] <-newprop$propmed[5:8]
 newprop$prop[9:12] <- newprop$prophigh[9:12]
-newprop$thresh <- c(rep("low", 4), rep("med", 4), rep('high', 4))
+newprop$threshold <- c(rep("low", 4), rep("med", 4), rep('high', 4))
 
 newprop <- newprop %>%
-  select(rcp, yr, prop, thresh) %>%
+  select(rcp, yr, prop, threshold) %>%
   mutate(yr = yr + 2000) %>%
   mutate(rcp = as.factor(rcp)) %>%
   mutate(line = 'present')
@@ -189,8 +189,8 @@ present <- newprop %>%
   mutate(prop = c(rep(0.5, 4), rep(0.3, 4), rep(0.2, 4)))
 
 propsplot <- ggplot(data = newprop) +
-  geom_point(aes(x = yr, y = prop, color = thresh, shape = rcp), size = 4) +
-  geom_line(aes(x = yr, y = present$prop, color = present$thresh, linetype = line)) +
+  geom_point(aes(x = yr, y = prop, color = threshold, shape = rcp), size = 4) +
+  geom_line(aes(x = yr, y = present$prop, color = present$threshold, linetype = line)) +
 scale_x_continuous('Year', breaks = c(2050, 2070),  limits = c(2045, 2075)) +
 scale_y_continuous('Proportion of Cells', limits = c(0, 1)) +
   theme_classic()
